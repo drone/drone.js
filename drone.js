@@ -136,6 +136,18 @@ class DroneClient {
 	}
 
 	/**
+	 * Returns the build artifact.
+	 * @param {Object} repository object.
+	 * @param {number} build number.
+	 * @param {number} process number.
+	 * @param {String} file name.
+	 */
+	getArtifact(repo, number, proc, file) {
+		var endpoint = ["/api/repos", repo.owner, repo.name, "files", number, proc, file].join("/")+"?raw=true";
+		return this._get(endpoint);
+	}
+
+	/**
 	 * Returns the repository secret list.
 	 */
 	getSecretList(owner, repo) {
@@ -371,4 +383,3 @@ class DroneClient {
 }
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-
