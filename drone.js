@@ -1,7 +1,7 @@
 class DroneClient {
 
 	constructor(server, token, csrf) {
-		this.server = server;
+		this.server = server || '';
 		this.token = token;
 		this.csrf = csrf;
 	}
@@ -144,6 +144,16 @@ class DroneClient {
 	 */
 	getArtifact(repo, number, proc, file) {
 		var endpoint = ["/api/repos", repo.owner, repo.name, "files", number, proc, file].join("/")+"?raw=true";
+		return this._get(endpoint);
+	}
+
+	/**
+	 * Returns the build artifact.
+	 * @param {Object} repository object.
+	 * @param {number} build number.
+	 */
+	getArtifactList(repo, number) {
+		var endpoint = ["/api/repos", repo.owner, repo.name, "files", number].join("/");
 		return this._get(endpoint);
 	}
 
